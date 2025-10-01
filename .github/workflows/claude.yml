@@ -38,7 +38,7 @@ jobs:
 
       - name: Run Checksum Code Action
         id: checksum
-        uses: harsh-sset/checksum-code@v1.0.14
+        uses: harsh-sset/checksum-code@v1.0.15
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.CHECKSUM_GITHUB_TOKEN }}
