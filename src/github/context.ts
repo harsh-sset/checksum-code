@@ -138,11 +138,11 @@ export function parseGitHubContext(): GitHubContext {
     actor: context.actor,
     inputs: {
       prompt: process.env.PROMPT || "",
-      triggerPhrase: process.env.TRIGGER_PHRASE ?? "@claude",
+      triggerPhrase: process.env.TRIGGER_PHRASE ?? "@checksum",
       assigneeTrigger: process.env.ASSIGNEE_TRIGGER ?? "",
       labelTrigger: process.env.LABEL_TRIGGER ?? "",
       baseBranch: process.env.BASE_BRANCH,
-      branchPrefix: process.env.BRANCH_PREFIX ?? "claude/",
+      branchPrefix: process.env.BRANCH_PREFIX ?? "checksum/",
       useStickyComment: process.env.USE_STICKY_COMMENT === "true",
       useCommitSigning: process.env.USE_COMMIT_SIGNING === "true",
       botId: process.env.BOT_ID ?? String(CLAUDE_APP_BOT_ID),
