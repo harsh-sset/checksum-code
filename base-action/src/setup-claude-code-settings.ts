@@ -8,7 +8,7 @@ export async function setupClaudeCodeSettings(
 ) {
   const home = homeDir ?? homedir();
   const settingsPath = `${home}/.claude/settings.json`;
-  console.log(`Setting up Claude settings at: ${settingsPath}`);
+  console.log(`Setting up Checksum settings at: ${settingsPath}`);
 
   // Ensure .claude directory exists
   console.log(`Creating .claude directory...`);

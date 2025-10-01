@@ -102,11 +102,11 @@ export async function runClaude(promptPath: string, options: ClaudeOptions) {
 
   // Log custom arguments if any
   if (options.claudeArgs && options.claudeArgs.trim() !== "") {
-    console.log(`Custom Claude arguments: ${options.claudeArgs}`);
+    console.log(`Custom arguments: ${options.claudeArgs}`);
   }
 
   // Output to console
-  console.log(`Running Claude with prompt from file: ${config.promptPath}`);
+  console.log(`Running Checksum with prompt from file: ${config.promptPath}`);
   console.log(`Full command: claude ${config.claudeArgs.join(" ")}`);
 
   // Start sending prompt to pipe in background
@@ -134,7 +134,7 @@ export async function runClaude(promptPath: string, options: ClaudeOptions) {
 
   // Handle Claude process errors
   claudeProcess.on("error", (error) => {
-    console.error("Error spawning Claude process:", error);
+    console.error("Error spawning Checksum process:", error);
     pipeStream.destroy();
   });
 
@@ -190,7 +190,7 @@ export async function runClaude(promptPath: string, options: ClaudeOptions) {
     });
 
     claudeProcess.on("error", (error) => {
-      console.error("Claude process error:", error);
+      console.error("Checksum process error:", error);
       resolve(1);
     });
   });
