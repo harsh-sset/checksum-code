@@ -29,11 +29,20 @@ jobs:
         with:
           fetch-depth: 1
 
-        - name: Run Checksum Code Action
-          id: checksum
-          uses: harsh-sset/checksum-code@v1.0.0
+      # Generate token from your custom Checksum Code GitHub App
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Run Checksum Code Action
+        id: checksum
+        uses: harsh-sset/checksum-code@v1.0.10
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ steps.app-token.outputs.token }}
           claude_args: |
             --allowedTools "Bash(bun install),Bash(bun test:*),Bash(bun run format),Bash(bun typecheck)"
             --model "claude-opus-4-1-20250805"
