@@ -79,6 +79,8 @@ export async function setupGitHubToken(): Promise<string> {
     // Check if GitHub token was provided as override
     const providedToken = process.env.OVERRIDE_GITHUB_TOKEN;
 
+    console.log("Environment variable OVERRIDE_GITHUB_TOKEN:", JSON.stringify(process.env));
+
     if (providedToken) {
       console.log("Using provided GITHUB_TOKEN for authentication");
       core.setOutput("GITHUB_TOKEN", providedToken);
