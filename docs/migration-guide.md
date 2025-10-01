@@ -1,6 +1,6 @@
 # Migration Guide: v0.x to v1.0
 
-This guide helps you migrate from Claude Code Action v0.x to v1.0. The new version introduces intelligent mode detection and simplified configuration while maintaining backward compatibility for most use cases.
+This guide helps you migrate from Checksum Code Action v0.x to v1.0. The new version introduces intelligent mode detection and simplified configuration while maintaining backward compatibility for most use cases.
 
 ## Overview of Changes
 

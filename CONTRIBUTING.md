@@ -1,6 +1,6 @@
-# Contributing to Claude Code Action
+# Contributing to Checksum Code Action
 
-Thank you for your interest in contributing to Claude Code Action! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to Checksum Code Action! This document provides guidelines and instructions for contributing to the project.
 
 ## Getting Started
 

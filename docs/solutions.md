@@ -1,6 +1,6 @@
 # Solutions & Use Cases
 
-This guide provides complete, ready-to-use solutions for common automation scenarios with Claude Code Action. Each solution includes working examples, configuration details, and expected outcomes.
+This guide provides complete, ready-to-use solutions for common automation scenarios with Checksum Code Action. Each solution includes working examples, configuration details, and expected outcomes.
 
 ## 📋 Table of Contents
 

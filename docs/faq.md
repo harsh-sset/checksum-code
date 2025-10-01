@@ -196,7 +196,7 @@ Comments appear as claude[bot] when the action uses its built-in authentication.
 
 ### What MCP servers are available by default?
 
-Claude Code Action automatically configures two MCP servers:
+Checksum Code Action automatically configures two MCP servers:
 
 1. **GitHub MCP server**: For GitHub API operations
 2. **File operations server**: For advanced file manipulation
