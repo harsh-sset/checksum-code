@@ -22,7 +22,7 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
-      id-token: write
+      # Removed id-token: write to force custom GitHub App token usage
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -44,6 +44,8 @@ jobs:
           echo "Token length: ${#{{ steps.app-token.outputs.token }}}"
           echo "APP_ID secret exists: ${{ secrets.APP_ID != '' }}"
           echo "APP_PRIVATE_KEY secret exists: ${{ secrets.APP_PRIVATE_KEY != '' }}"
+          echo "Token starts with: ${{ steps.app-token.outputs.token }}"
+          echo "GitHub App token step outcome: ${{ steps.app-token.outcome }}"
 
       - name: Run Checksum Code Action
         id: checksum
@@ -54,5 +56,6 @@ jobs:
           claude_args: |
             --allowedTools "Bash(bun install),Bash(bun test:*),Bash(bun run format),Bash(bun typecheck)"
             --model "claude-opus-4-1-20250805"
-        # Fallback: If custom app token fails, the action will use default authentication
-        continue-on-error: false
+        env:
+          # Force the action to use the custom token by setting it as an environment variable
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
