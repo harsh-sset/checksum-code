@@ -29,33 +29,22 @@ jobs:
         with:
           fetch-depth: 1
 
-      # Generate token from your custom Checksum Code GitHub App
-      - name: Generate GitHub App token
-        id: app-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
-      # Debug: Check if token was generated
-      - name: Debug - Check App Token
+      # Debug: Check if GitHub Access Token is available
+      - name: Debug - Check GitHub Access Token
         run: |
-          echo "App token generated: ${{ steps.app-token.outputs.token != '' }}"
-          echo "Token length: ${#{{ steps.app-token.outputs.token }}}"
-          echo "APP_ID secret exists: ${{ secrets.APP_ID != '' }}"
-          echo "APP_PRIVATE_KEY secret exists: ${{ secrets.APP_PRIVATE_KEY != '' }}"
-          echo "Token starts with: ${{ steps.app-token.outputs.token }}"
-          echo "GitHub App token step outcome: ${{ steps.app-token.outcome }}"
+          echo "GitHub Access Token exists: ${{ secrets.GITHUB_ACCESS_TOKEN != '' }}"
+          echo "Token length: ${#{{ secrets.GITHUB_ACCESS_TOKEN }}}"
+          echo "Token starts with: ${{ secrets.GITHUB_ACCESS_TOKEN }}"
 
       - name: Run Checksum Code Action
         id: checksum
         uses: harsh-sset/checksum-code@v1.0.11
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github_token: ${{ steps.app-token.outputs.token }}
+          github_token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
           claude_args: |
             --allowedTools "Bash(bun install),Bash(bun test:*),Bash(bun run format),Bash(bun typecheck)"
             --model "claude-opus-4-1-20250805"
         env:
           # Force the action to use the custom token by setting it as an environment variable
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_ACCESS_TOKEN }}
