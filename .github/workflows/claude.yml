@@ -29,9 +29,9 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Run Checksum Code Action
-        id: checksum
-        uses: harsh-sset/checksum-code-action@v1.0.0
+        - name: Run Checksum Code Action
+          id: checksum
+          uses: harsh-sset/checksum-code@v1.0.0
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           claude_args: |
