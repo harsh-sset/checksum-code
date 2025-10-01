@@ -1,4 +1,4 @@
-name: Claude Code
+name: Checksum Code
 
 on:
   issue_comment:
@@ -11,7 +11,7 @@ on:
     types: [submitted]
 
 jobs:
-  claude:
+  checksum:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 1
 
       - name: Run Checksum Code Action
-        id: claude
+        id: checksum
         uses: harsh-sset/checksum-code-action@v1.0.0
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}

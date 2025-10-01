@@ -1,5 +1,5 @@
 name: "Checksum Code Action v1.0"
-description: "Flexible GitHub automation platform with Claude. Auto-detects mode based on event type: PR reviews, @claude mentions, or custom automation."
+description: "Flexible GitHub automation platform with Checksum. Auto-detects mode based on event type: PR reviews, @checksum mentions, or custom automation."
 branding:
   icon: "check-circle"
   color: "blue"
@@ -8,21 +8,21 @@ inputs:
   trigger_phrase:
     description: "The trigger phrase to look for in comments or issue body"
     required: false
-    default: "@claude"
+    default: "@checksum"
   assignee_trigger:
-    description: "The assignee username that triggers the action (e.g. @claude)"
+    description: "The assignee username that triggers the action (e.g. @checksum)"
     required: false
   label_trigger:
-    description: "The label that triggers the action (e.g. claude)"
+    description: "The label that triggers the action (e.g. checksum)"
     required: false
-    default: "claude"
+    default: "checksum"
   base_branch:
     description: "The branch to use as the base/source when creating new branches (defaults to repository default branch)"
     required: false
   branch_prefix:
-    description: "The prefix to use for Claude branches (defaults to 'claude/', use 'claude-' for dash format)"
+    description: "The prefix to use for Checksum branches (defaults to 'checksum/', use 'checksum-' for dash format)"
     required: false
-    default: "claude/"
+    default: "checksum/"
   allowed_bots:
     description: "Comma-separated list of allowed bot usernames, or '*' to allow all bots. Empty string (default) allows no bots."
     required: false
@@ -32,13 +32,13 @@ inputs:
     required: false
     default: ""
 
-  # Claude Code configuration
+  # Checksum Code configuration
   prompt:
-    description: "Instructions for Claude. Can be a direct prompt or custom template."
+    description: "Instructions for Checksum. Can be a direct prompt or custom template."
     required: false
     default: ""
   settings:
-    description: "Claude Code settings as JSON string or path to settings JSON file"
+    description: "Checksum Code settings as JSON string or path to settings JSON file"
     required: false
     default: ""
 
@@ -78,13 +78,13 @@ inputs:
     required: false
     default: "false"
   bot_id:
-    description: "GitHub user ID to use for git operations (defaults to Claude's bot ID)"
+    description: "GitHub user ID to use for git operations (defaults to Checksum's bot ID)"
     required: false
-    default: "41898282" # Claude's bot ID - see src/github/constants.ts
+    default: "41898282" # Checksum's bot ID - see src/github/constants.ts
   bot_name:
-    description: "GitHub username to use for git operations (defaults to Claude's bot name)"
+    description: "GitHub username to use for git operations (defaults to Checksum's bot name)"
     required: false
-    default: "claude[bot]"
+    default: "checksum[bot]"
   track_progress:
     description: "Force tag mode with tracking comments for pull_request and issue events. Only applicable to pull_request (opened, synchronize, ready_for_review, reopened) and issue (opened, edited, labeled, assigned) events."
     required: false
@@ -94,7 +94,7 @@ inputs:
     required: false
     default: ""
   path_to_claude_code_executable:
-    description: "Optional path to a custom Claude Code executable. If provided, skips automatic installation and uses this executable instead. WARNING: Using an older version may cause problems if the action begins taking advantage of new Claude Code features. This input is typically not needed unless you're debugging something specific or have unique needs in your environment."
+    description: "Optional path to a custom Checksum Code executable. If provided, skips automatic installation and uses this executable instead. WARNING: Using an older version may cause problems if the action begins taking advantage of new Checksum Code features. This input is typically not needed unless you're debugging something specific or have unique needs in your environment."
     required: false
     default: ""
   path_to_bun_executable:
@@ -104,13 +104,13 @@ inputs:
 
 outputs:
   execution_file:
-    description: "Path to the Claude Code execution output file"
+    description: "Path to the Checksum Code execution output file"
     value: ${{ steps.claude-code.outputs.execution_file }}
   branch_name:
-    description: "The branch created by Claude Code for this execution"
+    description: "The branch created by Checksum Code for this execution"
     value: ${{ steps.prepare.outputs.CLAUDE_BRANCH }}
   github_token:
-    description: "The GitHub token used by the action (Claude App token if available)"
+    description: "The GitHub token used by the action (Checksum App token if available)"
     value: ${{ steps.prepare.outputs.github_token }}
 
 runs:
