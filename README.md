@@ -1,5 +1,3 @@
-
-
 # Checksum Code Action
 
 A general-purpose [Checksum Code](https://checksum.ai) action for GitHub PRs and issues that can answer questions and implement code changes. This action intelligently detects when to activate based on your workflow context—whether responding to @claude mentions, issue assignments, or executing automation tasks with explicit prompts. It supports multiple authentication methods including Anthropic direct API, Amazon Bedrock, and Google Vertex AI.

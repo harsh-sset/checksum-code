@@ -21,6 +21,7 @@ This guide will help you deploy the Checksum Code Action to the GitHub Actions m
 ## Step 2: Create a Release
 
 1. **Tag your version**:
+
    ```bash
    git tag -a v1.0.0 -m "Release version 1.0.0"
    git push origin v1.0.0
@@ -77,6 +78,7 @@ jobs:
 If you want to also publish to npm:
 
 1. **Update package.json** (already done):
+
    ```json
    {
      "name": "@checksum-code/checksum-code-action",
@@ -85,6 +87,7 @@ If you want to also publish to npm:
    ```
 
 2. **Login to npm**:
+
    ```bash
    npm login
    ```
@@ -130,6 +133,7 @@ You can further customize your action by:
 ## Support
 
 For issues or questions about deployment:
+
 - Check GitHub Actions documentation
 - Review the original Claude Code Action repository for reference
 - Create issues in your repository for user support
