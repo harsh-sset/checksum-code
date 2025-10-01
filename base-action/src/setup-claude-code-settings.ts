@@ -11,7 +11,7 @@ export async function setupClaudeCodeSettings(
   console.log(`Setting up Checksum settings at: ${settingsPath}`);
 
   // Ensure .claude directory exists
-  console.log(`Creating .claude directory...`);
+  // console.log(`Creating .claude directory...`);
   await $`mkdir -p ${home}/.claude`.quiet();
 
   let settings: Record<string, unknown> = {};
@@ -55,7 +55,7 @@ export async function setupClaudeCodeSettings(
     }
 
     // Merge input settings with existing settings
-    settings = { ...settings, ...inputSettings };
+    settings = { ...settings, ...inputSettings, verbose: false };
     console.log(`Merged settings with input settings`);
   }
 

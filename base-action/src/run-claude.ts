@@ -107,7 +107,7 @@ export async function runClaude(promptPath: string, options: ClaudeOptions) {
 
   // Output to console
   console.log(`Running Checksum with prompt from file: ${config.promptPath}`);
-  console.log(`Full command: claude ${config.claudeArgs.join(" ")}`);
+  console.log(`Full command args ${config.claudeArgs.join(" ")}`);
 
   // Start sending prompt to pipe in background
   const catProcess = spawn("cat", [config.promptPath], {
@@ -144,26 +144,26 @@ export async function runClaude(promptPath: string, options: ClaudeOptions) {
     const text = data.toString();
 
     // Try to parse as JSON and pretty print if it's on a single line
-    const lines = text.split("\n");
-    lines.forEach((line: string, index: number) => {
-      if (line.trim() === "") return;
+    // const lines = text.split("\n");
+    // lines.forEach((line: string, index: number) => {
+    //   if (line.trim() === "") return;
 
-      try {
-        // Check if this line is a JSON object
-        const parsed = JSON.parse(line);
-        const prettyJson = JSON.stringify(parsed, null, 2);
-        process.stdout.write(prettyJson);
-        if (index < lines.length - 1 || text.endsWith("\n")) {
-          process.stdout.write("\n");
-        }
-      } catch (e) {
-        // Not a JSON object, print as is
-        process.stdout.write(line);
-        if (index < lines.length - 1 || text.endsWith("\n")) {
-          process.stdout.write("\n");
-        }
-      }
-    });
+    //   try {
+    //     // Check if this line is a JSON object
+    //     const parsed = JSON.parse(line);
+    //     const prettyJson = JSON.stringify(parsed, null, 2);
+    //     process.stdout.write(prettyJson);
+    //     if (index < lines.length - 1 || text.endsWith("\n")) {
+    //       process.stdout.write("\n");
+    //     }
+    //   } catch (e) {
+    //     // Not a JSON object, print as is
+    //     process.stdout.write(line);
+    //     if (index < lines.length - 1 || text.endsWith("\n")) {
+    //       process.stdout.write("\n");
+    //     }
+    //   }
+    // });
 
     output += text;
   });
