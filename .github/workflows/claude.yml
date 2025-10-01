@@ -47,4 +47,4 @@ jobs:
             --model "claude-opus-4-1-20250805"
         env:
           # Force the action to use the custom token by setting it as an environment variable
-          GITHUB_TOKEN: ${{ secrets.CHECKSUM_GITHUB_TOKEN }}
+          OVERRIDE_GITHUB_TOKEN: ${{ secrets.CHECKSUM_GITHUB_TOKEN }}
