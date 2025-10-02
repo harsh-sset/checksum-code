@@ -1,27 +1,27 @@
-name: "Checksum Code Base Action"
-description: "Run Claude Code in GitHub Actions workflows"
+name: "Checksum Base Action"
+description: "Run Checksum in GitHub Actions workflows"
 branding:
   icon: "check-circle"
   color: "blue"
 
 inputs:
-  # Claude Code arguments
+  # Checksum arguments
   prompt:
-    description: "The prompt to send to Claude Code (mutually exclusive with prompt_file)"
+    description: "The prompt to send to Checksum (mutually exclusive with prompt_file)"
     required: false
     default: ""
   prompt_file:
-    description: "Path to a file containing the prompt to send to Claude Code (mutually exclusive with prompt)"
+    description: "Path to a file containing the prompt to send to Checksum (mutually exclusive with prompt)"
     required: false
     default: ""
   settings:
-    description: "Claude Code settings as JSON string or path to settings JSON file"
+    description: "Checksum settings as JSON string or path to settings JSON file"
     required: false
     default: ""
 
   # Action settings
   claude_args:
-    description: "Additional arguments to pass directly to Claude CLI (e.g., '--max-turns 3 --mcp-config /path/to/config.json')"
+    description: "Additional arguments to pass directly to Checksum (e.g., '--max-turns 3 --mcp-config /path/to/config.json')"
     required: false
     default: ""
 
@@ -58,10 +58,10 @@ inputs:
 
 outputs:
   conclusion:
-    description: "Execution status of Claude Code ('success' or 'failure')"
+    description: "Execution status of Checksum ('success' or 'failure')"
     value: ${{ steps.run_claude.outputs.conclusion }}
   execution_file:
-    description: "Path to the JSON file containing Claude Code execution log"
+    description: "Path to the JSON file containing Checksum execution log"
     value: ${{ steps.run_claude.outputs.execution_file }}
 
 runs:
@@ -107,7 +107,7 @@ runs:
           echo "$CLAUDE_DIR" >> "$GITHUB_PATH"
         fi
 
-    - name: Run Claude Code Action
+    - name: Run Checksum Action
       shell: bash
       id: run_claude
       run: |

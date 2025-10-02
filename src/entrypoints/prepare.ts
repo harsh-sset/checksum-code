@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
 /**
- * Prepare the Claude action by checking trigger conditions, verifying human actor,
+ * Prepare the Checksum action by checking trigger conditions, verifying human actor,
  * and creating the initial tracking comment
  */
 
@@ -15,6 +15,8 @@ import { prepare } from "../prepare";
 import { collectActionInputsPresence } from "./collect-inputs";
 
 async function run() {
+  // Silence console.log
+  console.log = () => {};
   try {
     collectActionInputsPresence();
 
@@ -48,16 +50,10 @@ async function run() {
     // Check trigger conditions
     const containsTrigger = mode.shouldTrigger(context);
 
-    // Debug logging
-    console.log(`Mode: ${mode.name}`);
-    console.log(`Context prompt: ${context.inputs?.prompt || "NO PROMPT"}`);
-    console.log(`Trigger result: ${containsTrigger}`);
-
     // Set output for action.yml to check
     core.setOutput("contains_trigger", containsTrigger.toString());
 
     if (!containsTrigger) {
-      console.log("No trigger found, skipping remaining steps");
       // Still set github_token output even when skipping
       core.setOutput("github_token", githubToken);
       return;

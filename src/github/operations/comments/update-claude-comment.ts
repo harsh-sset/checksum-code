@@ -15,7 +15,7 @@ export type UpdateClaudeCommentResult = {
 };
 
 /**
- * Updates a Claude comment on GitHub (either an issue/PR comment or a PR review comment)
+ * Updates a Checksum comment on GitHub (either an issue/PR comment or a PR review comment)
  *
  * @param octokit - Authenticated Octokit instance
  * @param params - Parameters for updating the comment

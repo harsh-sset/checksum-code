@@ -135,10 +135,10 @@ async function run() {
           ) {
             const entityType = context.isPR ? "PR" : "Issue";
             const prTitle = encodeURIComponent(
-              `${entityType} #${context.entityNumber}: Changes from Claude`,
+              `${entityType} #${context.entityNumber}: Changes from Checksum`,
             );
             const prBody = encodeURIComponent(
-              `This PR addresses ${entityType.toLowerCase()} #${context.entityNumber}\n\nGenerated with [Claude Code](https://claude.ai/code)`,
+              `This PR addresses ${entityType.toLowerCase()} #${context.entityNumber}\n\nGenerated with [Checksum](https://checksum.ai)`,
             );
             const prUrl = `${serverUrl}/${owner}/${repo}/compare/${baseBranch}...${claudeBranch}?quick_pull=1&title=${prTitle}&body=${prBody}`;
             prLink = `\n[Create a PR](${prUrl})`;
@@ -191,7 +191,7 @@ async function run() {
           }
         }
 
-        // Check if the Claude action failed
+        // Check if the Checksum action failed
         const claudeSuccess = process.env.CLAUDE_SUCCESS !== "false";
         actionFailed = !claudeSuccess;
       } catch (error) {
