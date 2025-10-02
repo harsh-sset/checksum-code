@@ -176,11 +176,9 @@ runs:
 
         # Install Claude Code if no custom executable is provided
         if [ -z "${{ inputs.path_to_claude_code_executable }}" ]; then
-          echo "Installing Claude Code..."
           curl -fsSL https://claude.ai/install.sh | bash -s 2.0.1
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
         else
-          echo "Using custom Claude Code executable: ${{ inputs.path_to_claude_code_executable }}"
           # Add the directory containing the custom executable to PATH
           CLAUDE_DIR=$(dirname "${{ inputs.path_to_claude_code_executable }}")
           echo "$CLAUDE_DIR" >> "$GITHUB_PATH"
@@ -270,15 +268,15 @@ runs:
         USE_COMMIT_SIGNING: ${{ inputs.use_commit_signing }}
         TRACK_PROGRESS: ${{ inputs.track_progress }}
 
-    - name: Display Claude Code Report
+    - name: Display Checksum Report
       if: steps.prepare.outputs.contains_trigger == 'true' && steps.claude-code.outputs.execution_file != ''
       shell: bash
       run: |
         # Try to format the turns, but if it fails, dump the raw JSON
         if bun run ${{ github.action_path }}/src/entrypoints/format-turns.ts "${{ steps.claude-code.outputs.execution_file }}" >> $GITHUB_STEP_SUMMARY 2>/dev/null; then
-          echo "Successfully formatted Claude Code report"
+          echo "Successfully formatted Checksum report"
         else
-          echo "## Claude Code Report (Raw Output)" >> $GITHUB_STEP_SUMMARY
+          echo "## Checksum Report (Raw Output)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Failed to format output (please report). Here's the raw JSON:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
