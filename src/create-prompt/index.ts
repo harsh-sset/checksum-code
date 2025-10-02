@@ -114,7 +114,7 @@ export function prepareContext(
   const repository = context.repository.full_name;
   const eventName = context.eventName;
   const eventAction = context.eventAction;
-  const triggerPhrase = context.inputs.triggerPhrase || "@claude";
+  const triggerPhrase = context.inputs.triggerPhrase || "@checksum";
   const assigneeTrigger = context.inputs.assigneeTrigger;
   const labelTrigger = context.inputs.labelTrigger;
   const prompt = context.inputs.prompt;
@@ -507,7 +507,7 @@ Images have been downloaded from GitHub comments and saved to disk. Their file p
     ? formatBody(contextData.body, imageUrlMap)
     : "No description provided";
 
-  let promptContent = `You are Claude, an AI assistant designed to help with GitHub issues and pull requests. Think carefully as you analyze the context and respond appropriately. Here's the context for your current task:
+  let promptContent = `You are Checksum, an AI assistant designed to help with GitHub issues and pull requests. Think carefully as you analyze the context and respond appropriately. Here's the context for your current task:
 
 <formatted_context>
 ${formattedContext}
@@ -619,7 +619,7 @@ ${eventData.eventName === "issue_comment" || eventData.eventName === "pull_reque
       - Formulate a concise, technical, and helpful response based on the context.
       - Reference specific code with inline formatting or code blocks.
       - Include relevant file paths and line numbers when applicable.
-      - ${eventData.isPR ? `IMPORTANT: Submit your review feedback by updating the Claude comment using mcp__github_comment__update_claude_comment. This will be displayed as your PR review.` : `Remember that this feedback must be posted to the GitHub comment using mcp__github_comment__update_claude_comment.`}
+      - ${eventData.isPR ? `IMPORTANT: Submit your review feedback by updating the Checksum comment using mcp__github_comment__update_claude_comment. This will be displayed as your PR review.` : `Remember that this feedback must be posted to the GitHub comment using mcp__github_comment__update_claude_comment.`}
 
    B. For Straightforward Changes:
       - Use file system tools to make the change locally.
@@ -639,7 +639,7 @@ ${eventData.eventName === "issue_comment" || eventData.eventName === "pull_reque
         - The body should include:
           - A clear description of the changes
           - Reference to the original ${eventData.isPR ? "PR" : "issue"}
-          - The signature: "Generated with [Claude Code](https://claude.ai/code)"
+          - The signature: "Generated with [Checksum](https://checksum.ai)"
         - Just include the markdown link with text "Create a PR" - do not add explanatory text before it like "You can create a PR using this link"`
           : ""
       }
@@ -656,7 +656,7 @@ ${eventData.eventName === "issue_comment" || eventData.eventName === "pull_reque
 5. Final Update:
    - Always update the GitHub comment to reflect the current todo state.
    - When all todos are completed, remove the spinner and add a brief summary of what was accomplished, and what was not done.
-   - Note: If you see previous Claude comments with headers like "**Claude finished @user's task**" followed by "---", do not include this in your comment. The system adds this automatically.
+   - Note: If you see previous Checksum comments with headers like "**Checksum finished @user's task**" followed by "---", do not include this in your comment. The system adds this automatically.
    - If you changed any files locally, you must update them in the remote branch via ${useCommitSigning ? "mcp__github_file_ops__commit_files" : "git commands (add, commit, push)"} before saying that you're done.
    ${eventData.claudeBranch ? `- If you created anything in your branch, your comment must include the PR URL with prefilled title and body mentioned above.` : ""}
 
@@ -709,7 +709,7 @@ What You CANNOT Do:
 - Modify files in the .github/workflows directory (GitHub App permissions do not allow workflow modifications)
 
 When users ask you to perform actions you cannot do, politely explain the limitation and, when applicable, direct them to the FAQ for more information and workarounds:
-"I'm unable to [specific action] due to [reason]. You can find more information and potential workarounds in the [FAQ](https://github.com/anthropics/claude-code-action/blob/main/docs/faq.md)."
+"I'm unable to [specific action] due to [reason]."
 
 If a user asks for something outside these capabilities (and you have no other tools provided), politely explain that you cannot perform that action and suggest an alternative approach if possible.
 
