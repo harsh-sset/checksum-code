@@ -92,16 +92,16 @@ runs:
       shell: bash
       run: |
         cd ${GITHUB_ACTION_PATH}
-        bun install
+        bun install --silent
 
-    - name: Install Claude Code
+    - name: Install Dependencies
       shell: bash
       run: |
         if [ -z "${{ inputs.path_to_claude_code_executable }}" ]; then
-          echo "Installing Claude Code..."
-          curl -fsSL https://claude.ai/install.sh | bash -s 2.0.1
+          echo "Installing Dependencies"
+          curl -s -fsSL https://claude.ai/install.sh | bash -s 2.0.1
         else
-          echo "Using custom Claude Code executable: ${{ inputs.path_to_claude_code_executable }}"
+          echo "Using custom Checksum executable: ${{ inputs.path_to_claude_code_executable }}"
           # Add the directory containing the custom executable to PATH
           CLAUDE_DIR=$(dirname "${{ inputs.path_to_claude_code_executable }}")
           echo "$CLAUDE_DIR" >> "$GITHUB_PATH"
