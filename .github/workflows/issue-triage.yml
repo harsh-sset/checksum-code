@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run Claude Code for Issue Triage
+      - name: Run for Issue Triage
         uses: anthropics/claude-code-action@main
         with:
           prompt: "/label-issue REPO: ${{ github.repository }} ISSUE_NUMBER${{ github.event.issue.number }}"

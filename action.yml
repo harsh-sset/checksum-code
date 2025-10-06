@@ -174,7 +174,7 @@ runs:
         echo "Base-action dependencies installed"
         cd -
 
-        # Install Claude Code if no custom executable is provided
+        # Install if no custom executable is provided
         if [ -z "${{ inputs.path_to_claude_code_executable }}" ]; then
           curl -fsSL https://claude.ai/install.sh | bash -s 2.0.1
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
@@ -193,8 +193,8 @@ runs:
       env:
         EXPERIMENTAL_ALLOWED_DOMAINS: ${{ inputs.experimental_allowed_domains }}
 
-    - name: Run Claude Code
-      id: claude-code
+    - name: Run Checksum
+      id: checksum
       if: steps.prepare.outputs.contains_trigger == 'true'
       shell: bash
       run: |
