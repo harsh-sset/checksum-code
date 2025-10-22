@@ -97,17 +97,21 @@ export async function runClaude(promptPath: string, options: ClaudeOptions) {
     (key) => key !== "CLAUDE_ACTION_INPUTS_PRESENT",
   );
   if (customEnvKeys.length > 0) {
-    console.log(`Custom environment variables: ${customEnvKeys.join(", ")}`);
+    // DISABLED FOR NOW
+    // console.log(`Custom environment variables: ${customEnvKeys.join(", ")}`);
   }
 
   // Log custom arguments if any
   if (options.claudeArgs && options.claudeArgs.trim() !== "") {
-    console.log(`Custom arguments: ${options.claudeArgs}`);
+    // DISABLED FOR NOW
+    // console.log(`Custom arguments: ${options.claudeArgs}`);
   }
 
   // Output to console
-  console.log(`Running Checksum with prompt from file: ${config.promptPath}`);
-  console.log(`Full command args ${config.claudeArgs.join(" ")}`);
+  // DISABLED FOR NOW
+  // console.log(`Running Checksum with prompt from file: ${config.promptPath}`);
+  // DISABLED FOR NOW
+  // console.log(`Full command args ${config.claudeArgs.join(" ")}`);
 
   // Start sending prompt to pipe in background
   const catProcess = spawn("cat", [config.promptPath], {

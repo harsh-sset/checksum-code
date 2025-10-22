@@ -150,6 +150,8 @@ runs:
         bun run ${GITHUB_ACTION_PATH}/src/entrypoints/prepare.ts
       env:
         MODE: ${{ inputs.mode }}
+        APP_ID: ${{ inputs.app_id }}
+        APP_PRIVATE_KEY: ${{ inputs.app_private_key }}
         PROMPT: ${{ inputs.prompt }}
         TRIGGER_PHRASE: ${{ inputs.trigger_phrase }}
         ASSIGNEE_TRIGGER: ${{ inputs.assignee_trigger }}
@@ -259,6 +261,8 @@ runs:
       env:
         REPOSITORY: ${{ github.repository }}
         PR_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+        APP_ID: ${{ inputs.app_id }}
+        APP_PRIVATE_KEY: ${{ inputs.app_private_key }}
         CLAUDE_COMMENT_ID: ${{ steps.prepare.outputs.claude_comment_id }}
         GITHUB_RUN_ID: ${{ github.run_id }}
         GITHUB_TOKEN: ${{ steps.prepare.outputs.GITHUB_TOKEN }}
