@@ -11,6 +11,9 @@ import { sanitizeContent } from "../github/utils/sanitizer";
 // Get repository information from environment variables
 const REPO_OWNER = process.env.REPO_OWNER;
 const REPO_NAME = process.env.REPO_NAME;
+const APP_ID = process.env.APP_ID;
+
+console.log("Within github-comment-server :: ", APP_ID);
 
 if (!REPO_OWNER || !REPO_NAME) {
   console.error(
