@@ -129,6 +129,14 @@ export type GitHubContext = ParsedGitHubContext | AutomationContext;
 export function parseGitHubContext(): GitHubContext {
   const context = github.context;
 
+  let allInputs: Record<string, string>;
+  try {
+    allInputs = JSON.parse(process.env.ALL_INPUTS!);
+  } catch (error) {
+    console.error("Failed to parse ALL_INPUTS JSON:", error);
+    throw new Error("Failed to parse ALL_INPUTS JSON");
+  }
+
   const commonFields = {
     runId: process.env.GITHUB_RUN_ID!,
     eventAction: context.payload.action,
@@ -139,8 +147,8 @@ export function parseGitHubContext(): GitHubContext {
     },
     actor: context.actor,
     inputs: {
-      appId: process.env.APP_ID ?? "",
-      appPrivateKey: process.env.APP_PRIVATE_KEY ?? "",
+      appId: allInputs.app_id ?? "",
+      appPrivateKey: allInputs.app_private_key ?? "",
       prompt: process.env.PROMPT || "",
       triggerPhrase: process.env.TRIGGER_PHRASE ?? "@checksum",
       assigneeTrigger: process.env.ASSIGNEE_TRIGGER ?? "",
