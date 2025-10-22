@@ -28,18 +28,18 @@ jobs:
             exit 1
           fi
 
-      - name: Install Claude Code manually
+      - name: Install Dependencies manually
         run: |
-          echo "Installing Claude Code..."
+          echo "Installing Dependencies..."
           curl -fsSL https://claude.ai/install.sh | bash -s latest
-          echo "Claude Code installed at: $HOME/.local/bin/claude"
+          echo "Dependencies installed at: $HOME/.local/bin/claude"
 
-          # Verify Claude installation
+          # Verify installation
           if [ -f "$HOME/.local/bin/claude" ]; then
-            echo "✅ Claude executable found"
+            echo "✅ Dependencies found"
             ls -la "$HOME/.local/bin/claude"
           else
-            echo "❌ Claude executable not found"
+            echo "❌ Dependencies not found"
             exit 1
           fi
 
@@ -75,7 +75,7 @@ jobs:
               echo "✅ Output is valid JSON"
               # Verify the task was completed
               if grep -q "package" "$OUTPUT_FILE"; then
-                echo "✅ Claude successfully listed package files"
+                echo "✅ Successfully listed package files"
               else
                 echo "⚠️ Could not verify if package files were listed"
               fi
