@@ -55,6 +55,6 @@ export function collectActionInputsPresence(): void {
     const isSet = actualValue !== defaultValue;
     presentInputs[name] = isSet;
   }
-  console.log("Present inputs: ", JSON.stringify(presentInputs, null, 2));
+  console.debug("Present inputs: ", JSON.stringify(presentInputs, null, 2));
   core.setOutput("action_inputs_present", JSON.stringify(presentInputs));
 }
