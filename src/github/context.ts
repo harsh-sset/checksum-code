@@ -131,7 +131,6 @@ export function parseGitHubContext(): GitHubContext {
 
   let allInputs: Record<string, string>;
   try {
-    console.debug("ALL_INPUTS WITHIN parseGitHubContext: ", process.env.ALL_INPUTS);
     allInputs = JSON.parse(process.env.ALL_INPUTS!);
   } catch (error) {
     console.error("Failed to parse ALL_INPUTS JSON:", error);

@@ -39,7 +39,7 @@ server.tool(
       const claudeCommentId = process.env.CLAUDE_COMMENT_ID;
       const eventName = process.env.GITHUB_EVENT_NAME;
 
-      console.log("Within update_claude_comment :: ", JSON.stringify(process.env, null, 2));
+      console.debug("Within update_claude_comment :: ", JSON.stringify(process.env, null, 2));
 
       if (!githubToken) {
         throw new Error("GITHUB_TOKEN environment variable is required");

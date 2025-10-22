@@ -23,8 +23,6 @@ async function run() {
     // Parse GitHub context first to enable mode detection
     const context = parseGitHubContext();
 
-    console.debug("Within prepare :: context: ", JSON.stringify(context, null, 2));
-
     // Auto-detect mode based on context
     const mode = getMode(context);
 

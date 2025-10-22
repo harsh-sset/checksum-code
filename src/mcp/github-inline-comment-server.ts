@@ -72,6 +72,7 @@ server.tool(
     try {
       const githubToken = process.env.GITHUB_TOKEN;
 
+      console.debug("Within create_inline_comment :: ", JSON.stringify(process.env, null, 2));
       if (!githubToken) {
         throw new Error("GITHUB_TOKEN environment variable is required");
       }
