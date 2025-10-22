@@ -137,6 +137,8 @@ export const agentMode: Mode = {
       allowedTools,
       mode: "agent",
       context,
+      appId: context.inputs.appId,
+      appPrivateKey: context.inputs.appPrivateKey,
     });
 
     // Build final claude_args with multiple --mcp-config flags

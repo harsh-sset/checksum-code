@@ -82,6 +82,8 @@ type BaseContext = {
   };
   actor: string;
   inputs: {
+    appId: string;
+    appPrivateKey: string;
     prompt: string;
     triggerPhrase: string;
     assigneeTrigger: string;
@@ -137,6 +139,8 @@ export function parseGitHubContext(): GitHubContext {
     },
     actor: context.actor,
     inputs: {
+      appId: process.env.APP_ID ?? "",
+      appPrivateKey: process.env.APP_PRIVATE_KEY ?? "",
       prompt: process.env.PROMPT || "",
       triggerPhrase: process.env.TRIGGER_PHRASE ?? "@checksum",
       assigneeTrigger: process.env.ASSIGNEE_TRIGGER ?? "",

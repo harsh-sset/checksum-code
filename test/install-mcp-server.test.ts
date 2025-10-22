@@ -86,6 +86,8 @@ describe("prepareMcpConfig", () => {
       allowedTools: [],
       context: mockContext,
       mode: "tag",
+      appId: "test-app-id",
+      appPrivateKey: "test-app-private-key",
     });
 
     const parsed = JSON.parse(result);

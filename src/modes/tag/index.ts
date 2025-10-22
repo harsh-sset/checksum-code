@@ -165,6 +165,8 @@ export const tagMode: Mode = {
       allowedTools: Array.from(new Set(tagModeTools)),
       mode: "tag",
       context,
+      appId: context.inputs.appId,
+      appPrivateKey: context.inputs.appPrivateKey,
     });
 
     // Build complete claude_args with multiple --mcp-config flags

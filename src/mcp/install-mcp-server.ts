@@ -15,6 +15,8 @@ type PrepareConfigParams = {
   allowedTools: string[];
   mode: AutoDetectedMode;
   context: GitHubContext;
+  appId: string
+  appPrivateKey: string
 };
 
 async function checkActionsReadPermission(
@@ -62,6 +64,8 @@ export async function prepareMcpConfig(
     allowedTools,
     context,
     mode,
+    appId,
+    appPrivateKey,
   } = params;
   try {
     const allowedToolsList = allowedTools || [];
@@ -108,7 +112,8 @@ export async function prepareMcpConfig(
           ...(claudeCommentId && { CLAUDE_COMMENT_ID: claudeCommentId }),
           GITHUB_EVENT_NAME: process.env.GITHUB_EVENT_NAME || "",
           GITHUB_API_URL: GITHUB_API_URL,
-          APP_ID: process.env.APP_ID || "",
+          APP_ID: appId,
+          APP_PRIVATE_KEY: appPrivateKey,
         },
       };
     }

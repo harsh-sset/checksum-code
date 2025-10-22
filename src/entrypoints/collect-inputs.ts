@@ -27,6 +27,8 @@ export function collectActionInputsPresence(): void {
     use_sticky_comment: "false",
     use_commit_signing: "false",
     experimental_allowed_domains: "",
+    app_id: "",
+    app_private_key: "",
   };
 
   const allInputsJson = process.env.ALL_INPUTS;
