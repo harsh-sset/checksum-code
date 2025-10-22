@@ -16,7 +16,7 @@ import { collectActionInputsPresence } from "./collect-inputs";
 
 async function run() {
   // Silence console.log
-  console.log = () => {};
+  // console.log = () => {};
   try {
     collectActionInputsPresence();
 
