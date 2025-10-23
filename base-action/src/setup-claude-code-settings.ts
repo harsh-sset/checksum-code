@@ -6,6 +6,8 @@ export async function setupClaudeCodeSettings(
   settingsInput?: string,
   homeDir?: string,
 ) {
+  // Disable console.log for this function
+  console.log = () => {};
   const home = homeDir ?? homedir();
   const settingsPath = `${home}/.claude/settings.json`;
   console.log(`Setting up Checksum settings at: ${settingsPath}`);

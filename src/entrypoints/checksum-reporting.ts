@@ -6,6 +6,7 @@ import { createOctokit } from "../github/api/client";
 async function invokeReportingApi(): Promise<void> {
     const { github_token, claude_comment_id, app_id, app_private_key } = process.env;
 
+    console.debug("process.env within invokeReportingApi: ", JSON.stringify(process.env, null, 2));
     console.debug("app_id: ", app_id);
     console.debug("app_private_key: ", app_private_key);
     console.debug("github_token: ", github_token);
