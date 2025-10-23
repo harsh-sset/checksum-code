@@ -310,8 +310,14 @@ runs:
         APP_ID: ${{ inputs.app_id }}
         APP_PRIVATE_KEY: ${{ inputs.app_private_key }}
         GITHUB_TOKEN: ${{ steps.prepare.outputs.GITHUB_TOKEN }}
+        GITHUB_REPO_NAME: ${{ github.repository_name }}
         GITHUB_EVENT_NAME: ${{ github.event_name }}
         GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_BRANCH: ${{ github.ref }}
+        GITHUB_BASE_BRANCH: ${{ github.base_ref }}
+        GITHUB_HEAD_BRANCH: ${{ github.head_ref }}
+        GITHUB_PR_NUMBER: ${{ github.event.pull_request.number }}
+        GITHUB_PR_LINK: ${{ github.event.pull_request.html_url }}
         GITHUB_RUN_ID: ${{ github.run_id }}
         GITHUB_RUN_NUMBER: ${{ github.run_number }}
         GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
