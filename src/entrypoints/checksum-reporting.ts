@@ -4,15 +4,16 @@ import { parseGitHubContext } from "../github/context";
 import { createOctokit } from "../github/api/client";
 
 async function invokeReportingApi(): Promise<void> {
-    const { GITHUB_TOKEN, CLAUDE_COMMENT_ID, APP_ID, APP_PRIVATE_KEY, GITHUB_REPO_OWNER, GITHUB_REPO_NAME, GITHUB_BRANCH, GITHUB_BASE_BRANCH, GITHUB_HEAD_BRANCH, GITHUB_PR_NUMBER, GITHUB_PR_LINK, GITHUB_RUN_ID, GITHUB_RUN_NUMBER, GITHUB_RUN_ATTEMPT } = process.env;
+    const { GITHUB_TOKEN, CLAUDE_COMMENT_ID, APP_ID, APP_PRIVATE_KEY, GITHUB_REPO_OWNER_NAME, GITHUB_EVENT_NAME, GITHUB_REPOSITORY, GITHUB_BRANCH, GITHUB_BASE_BRANCH, GITHUB_HEAD_BRANCH, GITHUB_PR_NUMBER, GITHUB_PR_LINK, GITHUB_RUN_ID, GITHUB_RUN_NUMBER, GITHUB_RUN_ATTEMPT } = process.env;
 
     console.debug("process.env within invokeReportingApi: ", JSON.stringify({
         APP_ID,
         APP_PRIVATE_KEY,
         GITHUB_TOKEN,
         CLAUDE_COMMENT_ID,
-        GITHUB_REPO_OWNER,
-        GITHUB_REPO_NAME,
+        GITHUB_REPO_OWNER_NAME,
+        GITHUB_EVENT_NAME,
+        GITHUB_REPOSITORY,
         GITHUB_BRANCH,
         GITHUB_BASE_BRANCH,
         GITHUB_HEAD_BRANCH,
@@ -33,12 +34,42 @@ async function invokeReportingApi(): Promise<void> {
     // get comment content using octokit
     const octokit = createOctokit(GITHUB_TOKEN);
     try {
-    const comment = await octokit.rest.issues.getComment({
+        const comment = await octokit.rest.issues.getComment({
         owner: context.repository.owner,
             repo: context.repository.repo,
             comment_id: parseInt(CLAUDE_COMMENT_ID!),
         });
-        console.debug("Comment content: ", comment.data.body);
+       
+        // invoke reporting api
+        const response = await fetch('https://reproting-api-770070026559.us-east1.run.app', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              appId: APP_ID,
+              appPrivateKey: APP_PRIVATE_KEY,
+              commentContent: comment.data.body,
+              github: {
+                repo: GITHUB_REPOSITORY,
+                owner: GITHUB_REPO_OWNER_NAME,
+                branch: GITHUB_BRANCH,
+                baseBranch: GITHUB_BASE_BRANCH,
+                headBranch: GITHUB_HEAD_BRANCH,
+                prNumber: GITHUB_PR_NUMBER, // optional
+                prLink: GITHUB_PR_LINK, // optional
+                runId: GITHUB_RUN_ID,
+                runNumber: GITHUB_RUN_NUMBER, // optional
+                runAttempt: GITHUB_RUN_ATTEMPT, // optional
+                commentId: CLAUDE_COMMENT_ID,
+              }
+            })
+        });
+        if(!response.ok) {
+            throw new Error("Failed to invoke reporting API");
+        }
+        await response.json();
+        console.debug("Concluding reporting API");
     } catch (error) {
         console.error("Error getting comment: ", error);
     }
