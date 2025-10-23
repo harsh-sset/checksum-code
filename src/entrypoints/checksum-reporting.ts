@@ -56,16 +56,17 @@ async function invokeReportingApi(): Promise<void> {
                 branch: GITHUB_BRANCH,
                 baseBranch: GITHUB_BASE_BRANCH,
                 headBranch: GITHUB_HEAD_BRANCH,
-                prNumber: GITHUB_PR_NUMBER, // optional
+                prNumber: parseInt(GITHUB_PR_NUMBER!), // optional
                 prLink: GITHUB_PR_LINK, // optional
                 runId: GITHUB_RUN_ID,
-                runNumber: GITHUB_RUN_NUMBER, // optional
-                runAttempt: GITHUB_RUN_ATTEMPT, // optional
+                runNumber: parseInt(GITHUB_RUN_NUMBER!), // optional
+                runAttempt: parseInt(GITHUB_RUN_ATTEMPT!), // optional
                 commentId: CLAUDE_COMMENT_ID,
               }
             })
         });
         if(!response.ok) {
+            console.error("Failed to invoke reporting API: ", response.statusText);
             throw new Error("Failed to invoke reporting API");
         }
         await response.json();
