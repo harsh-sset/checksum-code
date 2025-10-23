@@ -141,7 +141,7 @@ runs:
       shell: bash
       run: |
         cd ${GITHUB_ACTION_PATH}
-        bun install
+        bun install --silent
 
     - name: Prepare action
       id: prepare
@@ -178,13 +178,13 @@ runs:
       run: |
         echo "Installing base-action dependencies..."
         cd ${GITHUB_ACTION_PATH}/base-action
-        bun install
+        bun install --silent
         echo "Base-action dependencies installed"
         cd -
 
         # Install if no custom executable is provided
         if [ -z "${{ inputs.path_to_claude_code_executable }}" ]; then
-          curl -fsSL https://claude.ai/install.sh | bash -s 2.0.1
+          curl -fsSL https://claude.ai/install.sh | bash -s 2.0.1 >/dev/null
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
         else
           # Add the directory containing the custom executable to PATH
