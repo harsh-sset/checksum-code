@@ -11,9 +11,6 @@ import { sanitizeContent } from "../github/utils/sanitizer";
 // Get repository information from environment variables
 const REPO_OWNER = process.env.REPO_OWNER;
 const REPO_NAME = process.env.REPO_NAME;
-const APP_ID = process.env.APP_ID;
-
-console.log("Within github-comment-server :: ", APP_ID);
 
 if (!REPO_OWNER || !REPO_NAME) {
   console.error(
@@ -38,8 +35,6 @@ server.tool(
       const githubToken = process.env.GITHUB_TOKEN;
       const claudeCommentId = process.env.CLAUDE_COMMENT_ID;
       const eventName = process.env.GITHUB_EVENT_NAME;
-
-      console.debug("Within update_claude_comment :: ", JSON.stringify(process.env, null, 2));
 
       if (!githubToken) {
         throw new Error("GITHUB_TOKEN environment variable is required");

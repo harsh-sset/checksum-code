@@ -4,28 +4,27 @@ import { parseGitHubContext } from "../github/context";
 import { createOctokit } from "../github/api/client";
 
 async function invokeReportingApi(): Promise<void> {
-    const { github_token, claude_comment_id, app_id, app_private_key } = process.env;
+    const { GITHUB_TOKEN, CLAUDE_COMMENT_ID, APP_ID, APP_PRIVATE_KEY } = process.env;
 
-    console.debug("process.env within invokeReportingApi: ", JSON.stringify(process.env, null, 2));
-    console.debug("app_id: ", app_id);
-    console.debug("app_private_key: ", app_private_key);
-    console.debug("github_token: ", github_token);
-    console.debug("claude_comment_id: ", claude_comment_id);
+    console.debug("app_id: ", APP_ID);
+    console.debug("app_private_key: ", APP_PRIVATE_KEY);
+    console.debug("github_token: ", GITHUB_TOKEN);
+    console.debug("claude_comment_id: ", CLAUDE_COMMENT_ID);
 
-    if(!app_id || !app_private_key) {
+    if(!APP_ID || !APP_PRIVATE_KEY) {
         throw new Error("app_id and app_private_key are required");
     }
-    if(!github_token || !claude_comment_id) {
+    if(!GITHUB_TOKEN || !CLAUDE_COMMENT_ID) {
         throw new Error("github_token and claude_comment_id are required");
     }
     const context = parseGitHubContext();
     // get comment content using octokit
-    const octokit = createOctokit(github_token);
+    const octokit = createOctokit(GITHUB_TOKEN);
     try {
     const comment = await octokit.rest.issues.getComment({
         owner: context.repository.owner,
             repo: context.repository.repo,
-            comment_id: parseInt(claude_comment_id!),
+            comment_id: parseInt(CLAUDE_COMMENT_ID!),
         });
         console.debug("Comment content: ", comment.data.body);
     } catch (error) {

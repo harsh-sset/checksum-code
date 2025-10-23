@@ -30,8 +30,6 @@ export async function updateClaudeComment(
 
   let response;
 
-  console.log("Within updateClaudeComment :: ", JSON.stringify(process.env, null, 2));
-
   try {
     if (isPullRequestReviewComment) {
       // Try PR review comment API first
