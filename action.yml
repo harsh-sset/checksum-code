@@ -1,33 +1,6 @@
 name: Checksum Code
 description: Checksum action via container image
 inputs:
-  trigger_phrase:
-    description: "The trigger phrase to look for in comments or issue body"
-    required: false
-    default: "@checksum"
-  assignee_trigger:
-    description: "The assignee username that triggers the action (e.g. @checksum)"
-    required: false
-  label_trigger:
-    description: "The label that triggers the action (e.g. checksum)"
-    required: false
-    default: "checksum"
-  base_branch:
-    description: "The branch to use as the base/source when creating new branches (defaults to repository default branch)"
-    required: false
-  branch_prefix:
-    description: "The prefix to use for Checksum branches (defaults to 'checksum/', use 'checksum-' for dash format)"
-    required: false
-    default: "checksum/"
-  allowed_bots:
-    description: "Comma-separated list of allowed bot usernames, or '*' to allow all bots. Empty string (default) allows no bots."
-    required: false
-    default: ""
-  allowed_non_write_users:
-    description: "Comma-separated list of usernames to allow without write permissions, or '*' to allow all users. Only works when github_token input is provided. WARNING: Use with extreme caution - this bypasses security checks and should only be used for workflows with very limited permissions (e.g., issue labeling)."
-    required: false
-    default: ""
-
   # Checksum Code configuration
   prompt:
     description: "Instructions for Checksum. Can be a direct prompt or custom template."
@@ -45,68 +18,10 @@ inputs:
   app_private_key:
     description: "Checksum App private key"
     required: true
-  anthropic_api_key:
-    description: "Anthropic API key (required for direct API, not needed for Bedrock/Vertex)"
-    required: false
-  claude_code_oauth_token:
-    description: "Claude Code OAuth token (alternative to anthropic_api_key)"
-    required: false
-  github_token:
-    description: "GitHub token with repo and pull request permissions (optional if using GitHub App)"
-    required: false
-  use_bedrock:
-    description: "Use Amazon Bedrock with OIDC authentication instead of direct Anthropic API"
-    required: false
-    default: "false"
-  use_vertex:
-    description: "Use Google Vertex AI with OIDC authentication instead of direct Anthropic API"
-    required: false
-    default: "false"
-
-  claude_args:
-    description: "Additional arguments to pass directly to Claude CLI"
-    required: false
-    default: ""
-  additional_permissions:
-    description: "Additional GitHub permissions to request (e.g., 'actions: read')"
-    required: false
-    default: ""
-  use_sticky_comment:
-    description: "Use just one comment to deliver issue/PR comments"
-    required: false
-    default: "false"
-  use_commit_signing:
-    description: "Enable commit signing using GitHub's commit signature verification. When false, Claude uses standard git commands"
-    required: false
-    default: "false"
-  bot_id:
-    description: "GitHub user ID to use for git operations (defaults to Checksum's bot ID)"
-    required: false
-    default: "41898282" # Checksum's bot ID - see src/github/constants.ts
-  bot_name:
-    description: "GitHub username to use for git operations (defaults to Checksum's bot name)"
-    required: false
-    default: "checksum[bot]"
-  track_progress:
-    description: "Force tag mode with tracking comments for pull_request and issue events. Only applicable to pull_request (opened, synchronize, ready_for_review, reopened) and issue (opened, edited, labeled, assigned) events."
-    required: false
-    default: "false"
-  experimental_allowed_domains:
-    description: "Restrict network access to these domains only (newline-separated). If not set, no restrictions are applied. Provider domains are auto-detected."
-    required: false
-    default: ""
-  path_to_claude_code_executable:
-    description: "Optional path to a custom Checksum Code executable. If provided, skips automatic installation and uses this executable instead. WARNING: Using an older version may cause problems if the action begins taking advantage of new Checksum Code features. This input is typically not needed unless you're debugging something specific or have unique needs in your environment."
-    required: false
-    default: ""
-  path_to_bun_executable:
-    description: "Optional path to a custom Bun executable. If provided, skips automatic Bun installation and uses this executable instead. WARNING: Using an incompatible version may cause problems if the action requires specific Bun features. This input is typically not needed unless you're debugging something specific or have unique needs in your environment."
-    required: false
-    default: ""
 
 runs:
   using: docker
-  image: docker://ghcr.io/harsh-sset/checksum-code-priv:0.0.1
+  image: docker://ghcr.io/harsh-sset/checksum-code-priv:latest
 branding:
   color: blue
   icon: check-circle
