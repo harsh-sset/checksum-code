@@ -106,7 +106,7 @@ inputs:
 
 runs:
   using: docker
-  image: docker://ghcr.io/harsh-sset/checksum-code-priv:v0.0.1
+  image: docker://ghcr.io/harsh-sset/checksum-code-priv:0.0.1
 branding:
   color: blue
   icon: check-circle
